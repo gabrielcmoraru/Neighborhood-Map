@@ -2,13 +2,21 @@
   text-align: center;
 }
 
-
 .App-title {
   font-size: 1.5em;
 }
 
 .App-intro {
   font-size: large;
+}
+
+li:nth-child(even) {
+  background:grey;
+  color:white;
+}
+li:nth-child(odd) {
+  background:lightgray;
+  color:#336669;
 }
 
 

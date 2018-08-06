@@ -53,8 +53,8 @@ class Map extends Component {
             { this.state.foursquare.map(item => (
               <Marker key={item.id} item={item} lat={item.location.lat} lng={item.location.lng} />))}
           </GoogleMapReact>
+          <Search key={this.state.foursquare.id} items={this.state.foursquare} />
         </div>
-        <Search key={this.state.foursquare.id} items={this.state.foursquare} />
       </Fragment>
     );
   }

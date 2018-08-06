@@ -23,8 +23,8 @@ export default class Search extends Component {
 
     return (
       <SearchObject>
+        <SearchInput style={{ width: '100%', height: '100%' }} onChange={this.searchUpdated} />
         <SearchList>
-          <SearchInput onChange={this.searchUpdated} />
           {filteredLocations.map(item => (
             <li key={item.id}>
               {item.name}
@@ -37,57 +37,15 @@ export default class Search extends Component {
 }
 
 
-// export default class Search extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       search: '',
-//     };
-//   }
-
-
-//   render() {
-//     const filteredLocations = this.props.items.filter(
-//       (location) => {
-//         location.name.indexOf(this.state.search) !== -1;
-//         console.log(filteredLocations);
-//       },
-//     );
-//     return (
-//       <SearchObject>
-//         <input
-//           type="text"
-//           value={this.state.search}
-//           onChange={this.updateSearch.bind(this)}
-//         />
-//         <SearchList>
-//           {filteredLocations.map(item => (
-//             <li key={item.id} item={item}>
-//               {item.name}
-//             </li>
-//           ))}
-//         </SearchList>
-//       </SearchObject>
-//     );
-//   }
-
-//   updateSearch(event) {
-//     this.setState({
-//       search: event.target.value.substr(0, 20),
-//     });
-//   }
-// }
-
-
 export const SearchObject = styled.div`
-    display: inline-block;
-    width:80%;
+display: inline-grid;
+border: 1px solid black;
 `;
 
 export const SearchList = styled.ul`
   list-style:none;
+  margin:0;
   padding:0;
-  background:#888;
   height:100%;
-  width:30%;
+  width:200px;
 `;
