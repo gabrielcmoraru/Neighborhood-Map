@@ -17,27 +17,29 @@ export default class Modal extends Component {
           enter={{ opacity: 1, bgOpacity: 0.5, y: '0px' }}
           leave={{ opacity: 0, bgOpacity: 0, y: '50px' }}
         >
-          {on &&
-            (styles => (
+          {on
+            && (styles => (
               <ModalWrapper>
                 <ModalCard
                   style={{
                     transform: styles.y.interpolate(
-                      y => `translate3d(0, ${y}, 0)`
+                      y => `translate3d(0, ${y}, 0)`,
                     ),
-                    ...styles
+                    ...styles,
                   }}
                 >
                   <CloseButton onClick={toggle}>
                     <Icon name="close" />
                   </CloseButton>
-                  <div>{children}</div>
+                  <div>
+{children}
+</div>
                 </ModalCard>
                 <Background
                   style={{
                     opacity: styles.bgOpacity.interpolate(
-                      bgOpacity => bgOpacity
-                    )
+                      bgOpacity => bgOpacity,
+                    ),
                   }}
                   onClick={toggle}
                 />
@@ -73,7 +75,7 @@ const CloseButton = styled.button`
   padding: 10px;
   ${absolute({
     y: 'top',
-    x: 'right'
+    x: 'right',
   })};
 `;
 
