@@ -9,6 +9,7 @@
     "react-dom": "^16.4.2",
     "react-foursquare": "^1.0.3",
     "react-scripts": "1.1.4",
+    "react-spring": "^5.5.4",
     "styled-components": "^3.4.1"
   },
   "scripts": {
