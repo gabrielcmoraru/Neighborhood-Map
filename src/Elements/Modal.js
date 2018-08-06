@@ -32,8 +32,8 @@ export default class Modal extends Component {
                     <Icon name="close" />
                   </CloseButton>
                   <div>
-{children}
-</div>
+                    {children}
+                                    </div>
                 </ModalCard>
                 <Background
                   style={{

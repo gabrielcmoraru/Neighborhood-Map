@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import GoogleMapReact from 'google-map-react';
 import mapStyle from './mapStyle.json';
 import Marker from './Marker';
+import Search from './Search';
+
 
 const foursquare = require('react-foursquare')({
   clientID: 'MDL3L4ZAR3BCRYQGBLUNCH5FW1CYY43XJQCCIAAJFH1HM21M',
@@ -40,17 +42,20 @@ class Map extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          options={{ styles: mapStyle, disableDefaultUI: true }}
-          bootstrapURLKeys={{ key: 'AIzaSyDuVUBfjdAwk8mVwkhVZl794692wvszwi8' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          { this.state.foursquare.map(item => (
-            <Marker key={item.id} item={item} lat={item.location.lat} lng={item.location.lng} />))}
-        </GoogleMapReact>
-      </div>
+      <Fragment>
+        <div style={{ height: '100vh', width: '75%' }}>
+          <GoogleMapReact
+            options={{ styles: mapStyle, disableDefaultUI: true }}
+            bootstrapURLKeys={{ key: 'AIzaSyDuVUBfjdAwk8mVwkhVZl794692wvszwi8' }}
+            defaultCenter={this.props.center}
+            defaultZoom={this.props.zoom}
+          >
+            { this.state.foursquare.map(item => (
+              <Marker key={item.id} item={item} lat={item.location.lat} lng={item.location.lng} />))}
+          </GoogleMapReact>
+        </div>
+        <Search key={this.state.foursquare.id} items={this.state.foursquare} />
+      </Fragment>
     );
   }
 }
