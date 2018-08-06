@@ -19,7 +19,7 @@ class Map extends Component {
       lat: 51.4276472,
       lng: -0.1701949,
     },
-    zoom: 16,
+    zoom: 13,
   };
 
   constructor(props) {
@@ -42,7 +42,7 @@ class Map extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          options={{ styles: mapStyle }}
+          options={{ styles: mapStyle, disableDefaultUI: true }}
           bootstrapURLKeys={{ key: 'AIzaSyDuVUBfjdAwk8mVwkhVZl794692wvszwi8' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
