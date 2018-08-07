@@ -20,11 +20,10 @@ export default class Search extends Component {
 
   render() {
     const filteredLocations = this.props.items.filter(createFilter(this.state.searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
-
     return (
       <SearchObject>
         <SearchInput style={{ width: '100%', height: '100%' }} onChange={this.searchUpdated} />
-        <SearchList>
+        <SearchList filteredLocations={this.filteredLocations}>
           {filteredLocations.map(item => (
             <li key={item.id}>
               {item.name}
