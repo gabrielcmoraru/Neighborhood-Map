@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
+import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
 
+const foursquare = require('react-foursquare')({
+  clientID: key.fsClientId,
+  clientSecret: key.fsClientSecret,
+});
+
 class App extends Component {
+  static defaultProps = {
+    center: {
+      lat: 51.4276472,
+      lng: -0.1701949,
+    },
+    zoom: 13,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
+      foursquare: [],
       locations: [],
       map: '',
       InfoWindow: '',
@@ -22,18 +37,28 @@ class App extends Component {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places&callback=initMap`;
     script.onerror = () => { alert('Error loading Google API'); };
 
+
     document.body.appendChild(script);
+
+    const params = {
+      ll: `${this.props.center.lat},${this.props.center.lng}`,
+      query: 'bar',
+    };
+    foursquare.venues.getVenues(params)
+      .then((res) => {
+        this.setState({
+          foursquare: res.response.venues,
+        });
+      });
   }
 
   initMap() {
     const self = this;
     let map;
     map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: 51.4276472,
-        lng: -0.1701949,
-      },
-      zoom: 13,
+      center: this.props.center,
+      styles: mapStyle,
+      zoom: this.props.zoom,
     });
 
     const InfoWindow = new window.google.maps.InfoWindow({});
@@ -45,22 +70,21 @@ class App extends Component {
       InfoWindow,
     });
 
-    const locations = [];
-    this.state.locations.forEach((location) => {
-      const id = location.name;
-      const marker = new window.google.maps.Marker({
-        position: new window.google.maps.LatLng(location.lat, location.lng),
-        latitude: location.lat,
-        longitude: location.lng,
+    let locations = [];
+    this.state.foursquare.forEach((location) => {
+      let id = location.name;
+      let marker = new window.google.maps.Marker({
+        position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
         map,
         title: location.name,
       });
       location.id = id;
       location.marker = marker;
       locations.push(location);
-      marker.addListener('click', () => self.populateInfoWindow(marker));
+      marker.addListener('click', () => {
+        self.populateInfoWindow(marker);
+      });
     });
-
     this.setState({
       locations,
     });
