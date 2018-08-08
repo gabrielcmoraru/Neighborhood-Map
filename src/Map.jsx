@@ -31,8 +31,10 @@ class Map extends Component {
       foursquare: [],
       searchTerm: '',
       searchResults: [],
+      active: [],
     };
     this.searchUpdated = this.searchUpdated.bind(this);
+    this.handler = this.handler.bind(this);
   }
 
   componentDidMount() {
@@ -49,21 +51,16 @@ class Map extends Component {
   searchUpdated(term) {
     this.setState({ searchTerm: term.toLocaleLowerCase() });
 
-    // const filteredLocations = [];
-
-    // this.setState({ searchResults: this.state.foursquare });
-
-
     const filteredLocations = this.state.foursquare.filter(createFilter(this.state.searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
     this.setState({ searchResults: filteredLocations });
   }
-
 
   handler = (item) => {
     console.log(item);
   }
 
   render() {
+    console.log(this.state.active);
     return (
       // Important! Always set the container height explicitly
       <Fragment>
@@ -76,7 +73,7 @@ class Map extends Component {
 
           >
             { this.state.searchResults.map(item => (
-              <Marker key={item.id} item={item} lat={item.location.lat} lng={item.location.lng} />))}
+              <Marker key={item.id} active={this.state.active} item={item} lat={item.location.lat} lng={item.location.lng} />))}
           </GoogleMapReact>
           <SearchObject
             filteredLocations={this.state.searchResults}
