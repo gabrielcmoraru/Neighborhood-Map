@@ -5,7 +5,6 @@ import SearchInput, { createFilter } from 'react-search-input';
 import mapStyle from './mapStyle.json';
 import Marker from './Marker';
 
-
 const foursquare = require('react-foursquare')({
   clientID: 'MDL3L4ZAR3BCRYQGBLUNCH5FW1CYY43XJQCCIAAJFH1HM21M',
   clientSecret: 'XKLCEBLVI125M2WMHTJN3JGH33EPBMI5FGV2F3MPBJBPTRLY',
@@ -31,6 +30,7 @@ class Map extends Component {
     this.state = {
       foursquare: [],
       searchTerm: '',
+      searchResults: [],
     };
     this.searchUpdated = this.searchUpdated.bind(this);
   }
@@ -38,36 +38,53 @@ class Map extends Component {
   componentDidMount() {
     foursquare.venues.getVenues(params)
       .then((res) => {
-        this.setState({ foursquare: res.response.venues });
+        this.setState({
+          foursquare: res.response.venues,
+          searchResults: res.response.venues,
+        });
         console.log(res.response.venues);
       });
   }
 
   searchUpdated(term) {
     this.setState({ searchTerm: term.toLocaleLowerCase() });
+
+    // const filteredLocations = [];
+
+    // this.setState({ searchResults: this.state.foursquare });
+
+
+    const filteredLocations = this.state.foursquare.filter(createFilter(this.state.searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
+    this.setState({ searchResults: filteredLocations });
+  }
+
+
+  handler = (item) => {
+    console.log(item);
   }
 
   render() {
-    const filteredLocations = this.state.foursquare.filter(createFilter(this.state.searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
-
     return (
       // Important! Always set the container height explicitly
       <Fragment>
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
-            options={{ styles: mapStyle, disableDefaultUI: true }}
+            options={{ styles: mapStyle }}
             bootstrapURLKeys={{ key: 'AIzaSyDuVUBfjdAwk8mVwkhVZl794692wvszwi8' }}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
+
           >
-            { filteredLocations.map(item => (
+            { this.state.searchResults.map(item => (
               <Marker key={item.id} item={item} lat={item.location.lat} lng={item.location.lng} />))}
           </GoogleMapReact>
-          <SearchObject>
+          <SearchObject
+            filteredLocations={this.state.searchResults}
+          >
             <SearchInput style={{ width: '100%', height: '100%' }} onChange={this.searchUpdated} />
             <SearchList filteredLocations={this.filteredLocations}>
-              {filteredLocations.map(item => (
-                <li key={item.id}>
+              {this.state.searchResults.map(item => (
+                <li key={item.id} item={item} onClick={() => this.handler(item)}>
                   {item.name}
                 </li>
               ))}
