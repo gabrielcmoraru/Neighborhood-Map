@@ -29,7 +29,7 @@ class App extends Component {
     this.populateInfoWindow = this.populateInfoWindow.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     window.initMap = this.initMap;
     const script = document.createElement('script');
     script.async = true;
@@ -37,9 +37,7 @@ class App extends Component {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places&callback=initMap`;
     script.onerror = () => { alert('Error loading Google API'); };
 
-
     document.body.appendChild(script);
-
     const params = {
       ll: `${this.props.center.lat},${this.props.center.lng}`,
       query: 'bar',
@@ -61,39 +59,53 @@ class App extends Component {
       zoom: this.props.zoom,
     });
 
-    const InfoWindow = new window.google.maps.InfoWindow({});
-
-    window.google.maps.event.addListener(InfoWindow, 'closeclick', () => self.closeWindow(InfoWindow));
+    const largeInfowindow = new window.google.maps.InfoWindow({});
+    const bounds = new window.google.maps.LatLngBounds();
+    window.google.maps.event.addListener(largeInfowindow, 'closeclick', () => {
+      self.closeWindow(largeInfowindow);
+    });
 
     this.setState({
       map,
-      InfoWindow,
+      InfoWindow: largeInfowindow,
     });
 
-    let locations = [];
+    const locations = [];
     this.state.foursquare.forEach((location) => {
-      let id = location.name;
-      let marker = new window.google.maps.Marker({
+      const id = location.name;
+      const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
         map,
         title: location.name,
+        // animation: window.google.maps.Animation.DROP,
       });
       location.id = id;
       location.marker = marker;
       locations.push(location);
+      bounds.extend(marker.position);
       marker.addListener('click', () => {
         self.populateInfoWindow(marker);
       });
+      map.fitBounds(bounds);
     });
+
     this.setState({
       locations,
     });
+    console.log(this.state.foursquare);
+    console.log(this.state.locations);
   }
 
   populateInfoWindow(marker) {
+    const infowindow = this.state.InfoWindow;
+    if (infowindow.marker !== marker) {
+      infowindow.marker = marker;
+      infowindow.setContent(`<h1>${marker.title}</h1>`);
+      infowindow.open(this.state.map, marker);
   }
 
-  closeWindow(InfoWindow) {
+  closeWindow(infowindow) {
+    infowindow.marker = '';
   }
 
   render() {
