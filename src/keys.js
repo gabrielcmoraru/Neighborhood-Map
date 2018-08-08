@@ -1,0 +1,7 @@
+
+
+export const gApiKey = 'AIzaSyDuVUBfjdAwk8mVwkhVZl794692wvszwi8';
+
+export const fClientId = 'MDL3L4ZAR3BCRYQGBLUNCH5FW1CYY43XJQCCIAAJFH1HM21M';
+
+export const fClientSecret = 'XKLCEBLVI125M2WMHTJN3JGH33EPBMI5FGV2F3MPBJBPTRLY';
