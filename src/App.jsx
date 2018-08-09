@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
+import { createFilter } from 'react-search-input';
 import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
 import Search from './Search';
+import fslogo from './foursquare-logo.png';
+
 
 const foursquare = require('react-foursquare')({
   clientID: key.fsClientId,
   clientSecret: key.fsClientSecret,
 });
+
+const KEYS_TO_FILTERS = ['name'];
 
 class App extends Component {
   static defaultProps = {
@@ -73,12 +78,12 @@ class App extends Component {
 
     const locations = [];
     this.state.foursquare.map((location) => {
-      const id = location.name;
+      const id = location.id;
       const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
         map,
         title: location.name,
-        // animation: window.google.maps.Animation.DROP,
+        animation: window.google.maps.Animation.DROP,
       });
       location.id = id;
       location.marker = marker;
@@ -99,11 +104,39 @@ class App extends Component {
 
   populateInfoWindow(marker) {
     const infowindow = this.state.InfoWindow;
-    if (infowindow.marker !== marker) {
-      infowindow.marker = marker;
-      infowindow.setContent(`<h1>${marker.title}</h1>`);
-      infowindow.open(this.state.map, marker);
-    }
+    infowindow.marker = marker;
+    infowindow.open(this.state.map, marker);
+    this.expandInfoWindow(marker, infowindow);
+  }
+
+  expandInfoWindow(marker, infowindow) {
+    const detailedMarker = this.state.foursquare.filter(createFilter(marker.title, KEYS_TO_FILTERS));
+    console.log(detailedMarker);
+    console.log(this.state.foursquare);
+    infowindow.setContent(`
+    <div class='info-box'>
+      <h1 class='info_title'>
+        ${detailedMarker[0].name}
+      </h1>
+      <ul class='info_address'>
+        <li>
+          ${detailedMarker[0].location.formattedAddress[0]}
+        </li>
+        <li>
+          ${detailedMarker[0].location.formattedAddress[1]}
+        </li>
+        <li>
+          ${detailedMarker[0].location.formattedAddress[3]}
+        </li>
+      </ul>
+      <a class='call_to_action' href='https://www.foursquare.com/v/${detailedMarker[0].id}'>
+        Check it out on &nbsp;
+        <img src=${fslogo} width='20' height='20' />
+        <span class='fs_logo'>
+        oursquare
+        </span>
+      </a>
+    </div>`);
   }
 
   closeWindow(infowindow) {

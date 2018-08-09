@@ -16,3 +16,45 @@
 h1 {
   text-align: center;
 }
+
+.info-box {
+  background: #d8d8d8;
+  border: 1px solid black;
+  text-align: center;
+  max-width: 400px;
+}
+
+.info_title {
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
+.info_address {
+  font-weight: 400;
+  list-style-type: none;
+  padding-left:0;
+  text-align: center;
+}
+
+.call_to_action {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-weight:500;
+  padding: 1em;
+  text-decoration: none;
+  color: black;}
+
+.call_to_action:hover {
+  text-decoration: italic;
+  color:#d8d8d8;
+  background:black;
+}
+
+.fs_logo {
+  margin-left:1px;
+}
+
+.call_to_action:hover .fs_logo {
+  color:#f94877;
+}

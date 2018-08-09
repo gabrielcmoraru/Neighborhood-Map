@@ -18,7 +18,7 @@ export default class Search extends Component {
     this.setState({ searchTerm: lowSearch });
 
     this.props.locations.map((location) => {
-      const lowLocation = location.id.toLowerCase();
+      const lowLocation = location.name.toLowerCase();
 
       if (lowLocation.indexOf(lowSearch) >= 0) {
         location.marker.setVisible(true);
