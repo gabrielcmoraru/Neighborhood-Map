@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
+import Search from './Search';
 
 const foursquare = require('react-foursquare')({
   clientID: key.fsClientId,
@@ -71,7 +72,7 @@ class App extends Component {
     });
 
     const locations = [];
-    this.state.foursquare.forEach((location) => {
+    this.state.foursquare.map((location) => {
       const id = location.name;
       const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
@@ -102,6 +103,7 @@ class App extends Component {
       infowindow.marker = marker;
       infowindow.setContent(`<h1>${marker.title}</h1>`);
       infowindow.open(this.state.map, marker);
+    }
   }
 
   closeWindow(infowindow) {
@@ -115,6 +117,7 @@ class App extends Component {
           <h1 id="title">
             Googler
           </h1>
+          <Search locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
         </div>
         <div id="map" role="application" aria-label="Map with locations" />
       </div>
