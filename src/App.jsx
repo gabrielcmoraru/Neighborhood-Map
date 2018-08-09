@@ -105,6 +105,8 @@ class App extends Component {
   populateInfoWindow(marker) {
     const infowindow = this.state.InfoWindow;
     infowindow.marker = marker;
+    marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    window.setTimeout(() => { marker.setAnimation(null); }, 1200);
     infowindow.open(this.state.map, marker);
     this.expandInfoWindow(marker, infowindow);
   }

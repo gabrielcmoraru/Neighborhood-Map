@@ -48,7 +48,14 @@ export default class Search extends Component {
         />
         <ul role="listbox" aria-label="Location list">
           {filteredLocations.map(place => (
-            <li role="button" aria-label="List item" tabIndex="0" className="LocationItems" key={place.name} onClick={this.props.populateInfoWindow.bind(this, place.marker)}>
+            <li
+              role="button"
+              aria-label="List item"
+              tabIndex="0"
+              className="LocationItems"
+              key={place.id}
+              onClick={this.props.populateInfoWindow.bind(this, place.marker)}
+            >
               {place.name}
             </li>
           ))}
