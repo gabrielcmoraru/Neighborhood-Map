@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import 'Styles/css/App.css';
 import { createFilter } from 'react-search-input';
 import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
@@ -117,10 +117,10 @@ class App extends Component {
     console.log(this.state.foursquare);
     infowindow.setContent(`
     <div class='info-box'>
-      <h1 class='info_title'>
+      <h1 class='info-title'>
         ${detailedMarker[0].name}
       </h1>
-      <ul class='info_address'>
+      <ul class='info-address'>
         <li>
           ${detailedMarker[0].location.formattedAddress[0]}
         </li>

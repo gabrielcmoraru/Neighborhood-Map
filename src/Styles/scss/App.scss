@@ -1,0 +1,71 @@
+html, body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Helvetica,sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  min-width: 20%;
+  min-height: 100%;
+  position: absolute;
+  right:0;
+}
+
+#map {
+  min-height: 100%;
+  min-width: 80%;
+  position: absolute;
+  left: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.info{
+  &-box {
+  background: #d8d8d8;
+  border: 1px solid black;
+  text-align: center;
+  max-width: 400px;
+  }
+
+  &-title {
+    font-size: 1.5em;
+    padding: 0.5em;
+  }
+
+  &-address {
+    font-weight: 400;
+    list-style-type: none;
+    padding-left:0;
+    text-align: center;
+  }
+}
+
+.call_to_action {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-weight:500;
+  padding: 1em;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    text-decoration: italic;
+    color:#d8d8d8;
+    background:black;
+  }
+
+  &:hover.fs_logo {
+  color:#f94877;
+  }
+
+  .fs_logo {
+    margin-left:1px;
+  }
+}
+
+
+

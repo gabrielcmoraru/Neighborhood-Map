@@ -1,9 +1,14 @@
+html, body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
 .wrapper {
   min-width: 20%;
   min-height: 100%;
   position: absolute;
-  right:0;
+  right: 0;
 }
 
 #map {
@@ -23,16 +28,14 @@ h1 {
   text-align: center;
   max-width: 400px;
 }
-
-.info_title {
+.info-title {
   font-size: 1.5em;
   padding: 0.5em;
 }
-
-.info_address {
+.info-address {
   font-weight: 400;
   list-style-type: none;
-  padding-left:0;
+  padding-left: 0;
   text-align: center;
 }
 
@@ -40,22 +43,21 @@ h1 {
   text-align: center;
   justify-content: center;
   display: flex;
-  font-weight:500;
+  font-weight: 500;
   padding: 1em;
   text-decoration: none;
-  color: black;}
-
+  color: black;
+}
 .call_to_action:hover {
   text-decoration: italic;
-  color:#d8d8d8;
-  background:black;
+  color: #d8d8d8;
+  background: black;
+}
+.call_to_action:hover.fs_logo {
+  color: #f94877;
+}
+.call_to_action .fs_logo {
+  margin-left: 1px;
 }
 
-.fs_logo {
-  margin-left:1px;
-}
-
-.call_to_action:hover .fs_logo {
-  color:#f94877;
-}
-
+/*# sourceMappingURL=App.css.map */
