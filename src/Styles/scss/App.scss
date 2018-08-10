@@ -1,19 +1,125 @@
 html, body {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Helvetica,sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Arial, Helvetica, sans-serif, 'Trebuchet MS', sans-serif, Helvetica,sans-serif;
   margin: 0;
   padding: 0;
+  background: #d8d8d8;
+}
+
+#App {
+  position: absolute;
+  width:100%;
+  height: 100%;
+
+}
+
+header {
+  display: block;
+  text-align: center;
+  justify-content: center;
+  padding: 0.3em;
+  font-family: 'Kaushan Script', cursive;
+  font-weight: normal;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin: 0.25em 0 0;
+  .header-part-1 {
+    text-decoration: none;
+    color: black
+  }
+  .header-part-2 {
+    font-style: italic;
+    font-weight: 800;
+    color: gray
+  }
 }
 
 .wrapper {
-  min-width: 20%;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: top;
+  min-width: 30%;
+  max-height: 100%;
+  overflow-y: scroll;
   position: absolute;
   right:0;
+
+  &::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+  }
+
+    &::-webkit-scrollbar{
+    width: 14px;
+    background-color: #F5F5F5;
+  }
+
+    &::-webkit-scrollbar-thumb{
+      background-color: #7dcdcd;
+      border:1px solid black;
+      border-radius: 20px;
+      background-image: -webkit-linear-gradient(
+        0deg,
+      rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%,
+      transparent)
+  }
+
+  input {
+    text-align: center;
+    text-transform: uppercase;
+    outline: 0;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    height: 2em;
+    margin: 0.5em;
+    padding: 0.5em;
+    width: 75%;
+    &::placeholder{
+      color:black;
+    }
+    &:focus+&::placeholder {
+      content: "";
+    }
+  }
+
+  ul {
+    width: 80%;
+    list-style: none;
+    padding: 0;
+    margin: auto;
+
+    li {
+      line-height: 20px;
+      border: 1px solid black;
+      margin: 0.5em;
+      padding: 0.5em;
+
+      &:hover {
+        cursor:pointer;
+        background:black;
+        color:white;
+        margin: 3px 0 3px 0;
+        transition: all ease-in 0.25s;
+        &::after {
+          content:'';
+          display:block;
+          height:0.4em;
+          width:60%;
+          margin:auto;
+          border-bottom:solid ;
+        }
+      }
+    }
+  }
 }
+
 
 #map {
   min-height: 100%;
-  min-width: 80%;
+  min-width: 70%;
   position: absolute;
   left: 0;
 }

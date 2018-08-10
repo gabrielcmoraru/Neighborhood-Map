@@ -42,7 +42,8 @@ export default class Search extends Component {
           role="search"
           id="Search"
           type="text"
-          placeholder="Search for a Location"
+          placeholder="
+          &#128269; Search in the results"
           value={this.state.searchTerm}
           onChange={e => this.searchUpdated(e.target.value)}
         />

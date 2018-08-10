@@ -5,6 +5,7 @@ import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
 import Search from './Search';
 import fslogo from './foursquare-logo.png';
+import Header from './Header';
 
 
 const foursquare = require('react-foursquare')({
@@ -83,7 +84,7 @@ class App extends Component {
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
         map,
         title: location.name,
-        animation: window.google.maps.Animation.DROP,
+        // animation: window.google.maps.Animation.DROP,
       });
       location.id = id;
       location.marker = marker;
@@ -149,9 +150,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <h1 id="title">
-            Googler
-          </h1>
+          <Header />
           <Search locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
         </div>
         <div id="map" role="application" aria-label="Map with locations" />
