@@ -47,6 +47,13 @@ export default class Search extends Component {
           value={this.state.searchTerm}
           onChange={e => this.searchUpdated(e.target.value)}
         />
+        <h2>
+          Found
+          {' '}
+          {filteredLocations.length ? filteredLocations.length : 'no'}
+          {' '}
+          {filteredLocations.length === 1 ? 'result' : 'results'}
+        </h2>
         <ul role="listbox" aria-label="Location list">
           {filteredLocations.map(place => (
             <li

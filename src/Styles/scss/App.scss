@@ -12,27 +12,35 @@ header {
   padding: 0.3em;
   font-family: 'Kaushan Script', cursive;
   font-weight: normal;
-  font-size: 2.5rem;
   letter-spacing: 0.05em;
   line-height: 1;
   margin: 0.25em 0 0;
+  .header {
+    margin: 1.5em 0 0 ;
+    padding: 0.5em;
+  }
   .header-part-1 {
+    cursor: default;
+    font-size: 2.5rem;
     text-decoration: none;
     color: black
   }
   .header-part-2 {
+    font-size: 2.5rem;
     font-style: italic;
     font-weight: 800;
     color: gray
   }
 }
 
+
 .wrapper {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: top;
-  min-width: 30%;
+  width:100%;
+  max-width: 30%;
   max-height: 100%;
   overflow-y: scroll;
   position: absolute;
@@ -197,19 +205,6 @@ footer {
 
 
 @media screen and (max-width: 925px) {
-  header {
-    z-index: 1;
-    // background: rgba(216, 216, 216, 0.7);
-  }
 
-  .wrapper {
-    background: rgba(251, 255, 2, 0.5);
-    z-index: 1;
-  ul {
-    // display: none;
-    }
-  }
-  #map {
-    width: 100%;
-  }
+
 }

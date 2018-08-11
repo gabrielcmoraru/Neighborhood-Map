@@ -72,17 +72,9 @@ class App extends Component {
 
     const largeInfowindow = new window.google.maps.InfoWindow({});
     const bounds = new window.google.maps.LatLngBounds();
-    window.google.maps.event.addListener(largeInfowindow, 'closeclick', () => {
-      self.closeWindow(largeInfowindow);
-    });
-
-    this.setState({
-      map,
-      InfoWindow: largeInfowindow,
-    });
-
     const locations = [];
-    this.state.foursquare.map((location) => {
+
+    this.state.foursquare.forEach((location) => {
       const id = location.id;
       const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
@@ -103,6 +95,15 @@ class App extends Component {
     this.setState({
       locations,
     });
+    window.google.maps.event.addListener(largeInfowindow, 'closeclick', () => {
+      self.closeWindow(largeInfowindow);
+    });
+
+    this.setState({
+      map,
+      InfoWindow: largeInfowindow,
+    });
+
     console.log(this.state.foursquare);
     console.log(this.state.locations);
   }
