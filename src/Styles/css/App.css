@@ -74,8 +74,8 @@ header .header-part-2 {
 .wrapper input::placeholder {
   color: black;
 }
-.wrapper input:focus + .wrapper input::placeholder {
-  content: "";
+.wrapper input:focus::placeholder {
+  color: transparent;
 }
 .wrapper ul {
   width: 80%;

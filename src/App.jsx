@@ -45,6 +45,9 @@ class App extends Component {
     script.onerror = () => { alert('Error loading Google API'); };
 
     document.body.appendChild(script);
+  }
+
+  componentDidMount() {
     const params = {
       ll: `${this.props.center.lat},${this.props.center.lng}`,
       query: 'bar',

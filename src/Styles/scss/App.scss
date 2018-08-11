@@ -56,14 +56,14 @@ header {
     background-color: #F5F5F5;
   }
 
-    &::-webkit-scrollbar-thumb{
-      background-color: #7dcdcd;
-      border:1px solid black;
-      border-radius: 20px;
-      background-image: -webkit-linear-gradient(
-        0deg,
-      rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%,
-      transparent)
+  &::-webkit-scrollbar-thumb{
+    background-color: #7dcdcd;
+    border:1px solid black;
+    border-radius: 20px;
+    background-image: -webkit-linear-gradient(
+      0deg,
+    rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%,
+    transparent)
   }
 
   input {
@@ -80,8 +80,8 @@ header {
     &::placeholder{
       color:black;
     }
-    &:focus+&::placeholder {
-      content: "";
+    &:focus::placeholder {
+      color: transparent;
     }
   }
 
