@@ -66,6 +66,7 @@ class App extends Component {
       center: this.props.center,
       styles: mapStyle,
       zoom: this.props.zoom,
+      disableDefaultUI: true,
     });
 
     const largeInfowindow = new window.google.maps.InfoWindow({});

@@ -12,6 +12,7 @@ export default class Search extends Component {
     this.state = {
       searchTerm: '',
       filteredLocations: [],
+      showNav: true,
     };
   }
 
@@ -41,12 +42,12 @@ export default class Search extends Component {
 
     return (
       <div id="location-list">
-        <MenuIcon
-          style={{
-            zIndex: '105', color: 'black', display: 'block',
-          }}
+        <button
+          className="menu-button metal radial"
           onClick={() => this.setState({ showNav: true })}
-        />
+        >
+        &#128463; MENU
+        </button>
         <SideNav
           openFromRight
           style={{ overflowScrolling: 'touch' }}
