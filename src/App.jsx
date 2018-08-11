@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import 'Styles/css/App.css';
 import { createFilter } from 'react-search-input';
-import MenuContainer from './MenuContainer';
 import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
 import Search from './Search';
 import fslogo from './foursquare-logo.png';
-import Header from './Header';
-import Footer from './Footer';
 
 const foursquare = require('react-foursquare')({
   clientID: key.fsClientId,
@@ -68,6 +65,7 @@ class App extends Component {
       center: this.props.center,
       styles: mapStyle,
       zoom: this.props.zoom,
+      disableDefaultUI: true,
     });
 
     const largeInfowindow = new window.google.maps.InfoWindow({});
@@ -155,10 +153,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <MenuContainer locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
-          {/* <Header />
           <Search locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
-          <Footer /> */}
         </div>
         <div id="map" role="application" aria-label="Map with locations" />
       </div>
