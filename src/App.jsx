@@ -5,8 +5,6 @@ import mapStyle from './mapStyle.json';
 import * as key from './keys.js';
 import Search from './Search';
 import fslogo from './foursquare-logo.png';
-import Header from './Header';
-import Footer from './Footer';
 
 
 const foursquare = require('react-foursquare')({
@@ -155,9 +153,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <Header />
+          {/* <Header /> */}
           <Search locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
-          <Footer />
+          {/* <Footer /> */}
         </div>
         <div id="map" role="application" aria-label="Map with locations" />
       </div>

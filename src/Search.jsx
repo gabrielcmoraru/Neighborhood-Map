@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { createFilter } from 'react-search-input';
+import SideNav, { MenuIcon } from 'react-simple-sidenav';
+import Header from './Header';
+import Footer from './Footer';
 
 const KEYS_TO_FILTERS = ['name'];
 
@@ -38,36 +41,51 @@ export default class Search extends Component {
 
     return (
       <div id="location-list">
-        <input
-          role="search"
-          id="Search"
-          type="text"
-          placeholder="
-          &#128269; Search in the results"
-          value={this.state.searchTerm}
-          onChange={e => this.searchUpdated(e.target.value)}
+        <MenuIcon
+          style={{
+            zIndex: '105', color: 'black', display: 'block',
+          }}
+          onClick={() => this.setState({ showNav: true })}
         />
-        <h2>
+        <SideNav
+          openFromRight
+          style={{ overflowScrolling: 'touch' }}
+          showNav={this.state.showNav}
+          onHideNav={() => this.setState({ showNav: false })}
+        >
+          <Header />
+          <input
+            role="search"
+            id="Search"
+            type="text"
+            placeholder="
+          &#128269; Search in the results"
+            value={this.state.searchTerm}
+            onChange={e => this.searchUpdated(e.target.value)}
+          />
+          <h2>
           Found
-          {' '}
-          {filteredLocations.length ? filteredLocations.length : 'no'}
-          {' '}
-          {filteredLocations.length === 1 ? 'result' : 'results'}
-        </h2>
-        <ul role="listbox" aria-label="Location list">
-          {filteredLocations.map(place => (
-            <li
-              role="button"
-              aria-label="List item"
-              tabIndex="0"
-              className="LocationItems"
-              key={place.id}
-              onClick={this.props.populateInfoWindow.bind(this, place.marker)}
-            >
-              {place.name}
-            </li>
-          ))}
-        </ul>
+            {' '}
+            {filteredLocations.length ? filteredLocations.length : 'no'}
+            {' '}
+            {filteredLocations.length === 1 ? 'result' : 'results'}
+          </h2>
+          <ul role="listbox" aria-label="Location list">
+            {filteredLocations.map(place => (
+              <li
+                role="button"
+                aria-label="List item"
+                tabIndex="0"
+                className="LocationItems"
+                key={place.id}
+                onClick={this.props.populateInfoWindow.bind(this, place.marker)}
+              >
+                {place.name}
+              </li>
+            ))}
+          </ul>
+          <Footer />
+        </SideNav>
       </div>
     );
   }
