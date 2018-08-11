@@ -6,6 +6,7 @@ import * as key from './keys.js';
 import Search from './Search';
 import fslogo from './foursquare-logo.png';
 import Header from './Header';
+import Footer from './Footer';
 
 
 const foursquare = require('react-foursquare')({
@@ -155,6 +156,7 @@ class App extends Component {
         <div className="wrapper">
           <Header />
           <Search locations={this.state.locations} populateInfoWindow={this.populateInfoWindow} />
+          <Footer />
         </div>
         <div id="map" role="application" aria-label="Map with locations" />
       </div>

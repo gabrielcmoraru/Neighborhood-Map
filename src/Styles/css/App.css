@@ -5,12 +5,6 @@ html, body {
   background: #d8d8d8;
 }
 
-#App {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 header {
   display: block;
   text-align: center;
@@ -81,7 +75,7 @@ header .header-part-2 {
   width: 80%;
   list-style: none;
   padding: 0;
-  margin: auto;
+  margin: 1em auto 2em auto;
 }
 .wrapper ul li {
   line-height: 20px;
@@ -110,10 +104,6 @@ header .header-part-2 {
   min-width: 70%;
   position: absolute;
   left: 0;
-}
-
-h1 {
-  text-align: center;
 }
 
 .info-box {
@@ -152,6 +142,48 @@ h1 {
 }
 .call_to_action .fs_logo {
   margin-left: 1px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+}
+footer::before {
+  content: "";
+  display: block;
+  height: 0.4em;
+  width: 75%;
+  margin: auto;
+  border-bottom: solid;
+}
+footer a {
+  font-family: "Kaushan Script", cursive;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-decoration: none;
+  color: darkgreen;
+}
+footer p {
+  padding: 1em;
+  margin: 0;
+}
+footer p:first-child {
+  font-weight: 500;
+  padding: 0.5em;
+}
+
+@media screen and (max-width: 925px) {
+  header {
+    z-index: 1;
+  }
+
+  .wrapper {
+    background: rgba(251, 255, 2, 0.5);
+    z-index: 1;
+  }
+  #map {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */
