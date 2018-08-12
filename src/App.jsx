@@ -43,9 +43,6 @@ class App extends Component {
     script.onerror = () => { alert('Error loading Google API'); };
 
     document.body.appendChild(script);
-  }
-
-  componentDidMount() {
     const params = {
       ll: `${this.props.center.lat},${this.props.center.lng}`,
       query: 'bar',
@@ -56,6 +53,7 @@ class App extends Component {
           foursquare: res.response.venues,
         });
       });
+    console.log(this.state.foursquare);
   }
 
   initMap() {
@@ -78,7 +76,7 @@ class App extends Component {
         position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
         map,
         title: location.name,
-        // animation: window.google.maps.Animation.DROP,
+        animation: window.google.maps.Animation.DROP,
       });
       location.id = id;
       location.marker = marker;
@@ -101,9 +99,6 @@ class App extends Component {
       map,
       InfoWindow: largeInfowindow,
     });
-
-    console.log(this.state.foursquare);
-    console.log(this.state.locations);
   }
 
   populateInfoWindow(marker) {
@@ -117,8 +112,6 @@ class App extends Component {
 
   expandInfoWindow(marker, infowindow) {
     const detailedMarker = this.state.foursquare.filter(createFilter(marker.title, KEYS_TO_FILTERS));
-    console.log(detailedMarker);
-    console.log(this.state.foursquare);
     infowindow.setContent(`
     <div class='info-box'>
       <h1 class='info-title'>

@@ -8,11 +8,11 @@ const Footer = () => (
     <p>
       Powered by
       <br />
-      <a href="">
+      <a href="https://console.cloud.google.com/apis/">
       Google
       </a>
       &nbsp;&&nbsp;
-      <a href="">
+      <a href="https://developer.foursquare.com/">
       Foursquare
       </a>
       <br />

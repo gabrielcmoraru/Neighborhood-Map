@@ -83,6 +83,10 @@ header .header-part-2 {
   margin: 0.5em;
   padding: 0.5em;
 }
+.wrapper ul li:focus {
+  background: black;
+  color: white;
+}
 .wrapper ul li:hover {
   cursor: pointer;
   background: black;
@@ -92,8 +96,9 @@ header .header-part-2 {
 }
 .wrapper ul li:hover::after {
   content: "";
+  vertical-align: center;
   display: block;
-  height: 0.4em;
+  height: 0.2em;
   width: 60%;
   margin: auto;
   border-bottom: solid;
@@ -132,16 +137,16 @@ header .header-part-2 {
   text-decoration: none;
   color: black;
 }
+.call_to_action .fs_logo {
+  margin-left: 1px;
+}
 .call_to_action:hover {
   text-decoration: italic;
   color: #d8d8d8;
   background: black;
 }
-.call_to_action:hover.fs_logo {
+.call_to_action:hover .fs_logo {
   color: #f94877;
-}
-.call_to_action .fs_logo {
-  margin-left: 1px;
 }
 
 footer {
@@ -162,6 +167,15 @@ footer a {
   line-height: 1;
   text-decoration: none;
   color: darkgreen;
+}
+footer a:hover {
+  font-size: 1.3em;
+  background: #CDFEAA;
+  border-bottom: 1px solid;
+}
+footer a:active {
+  background: #265301;
+  color: yellow;
 }
 footer p {
   padding: 1em;
@@ -189,6 +203,7 @@ footer p:first-child {
   right: 25px;
   transform: scale(1.3);
   cursor: pointer;
+  transition: all ease-in 0.25s;
 }
 .menu-button:hover {
   background: black;

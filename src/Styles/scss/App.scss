@@ -35,16 +35,6 @@ header {
 
 .wrapper {
   text-align: center;
-  // position: fixed;
-  // display: flex;
-  // width: 50%;
-  // flex-direction: column;
-  // justify-content: top;
-  // width:100%;
-  // max-width: 30%;
-  // max-height: 100%;
-  // position: absolute;
-  // right:0;
 
   input {
     text-align: center;
@@ -99,7 +89,10 @@ header {
       border: 1px solid black;
       margin: 0.5em;
       padding: 0.5em;
-
+      &:focus{
+        background:black;
+        color:white;
+      }
       &:hover {
         cursor:pointer;
         background:black;
@@ -108,8 +101,9 @@ header {
         transition: all ease-in 0.25s;
         &::after {
           content:'';
+          vertical-align: center;
           display:block;
-          height:0.4em;
+          height:0.2em;
           width:60%;
           margin:auto;
           border-bottom:solid ;
@@ -157,18 +151,17 @@ header {
   text-decoration: none;
   color: black;
 
+  .fs_logo {
+    margin-left:1px;
+  }
+
   &:hover {
     text-decoration: italic;
     color:#d8d8d8;
     background:black;
-  }
-
-  &:hover.fs_logo {
-  color:#f94877;
-  }
-
-  .fs_logo {
-    margin-left:1px;
+    .fs_logo {
+      color:#f94877;
+    }
   }
 }
 
@@ -191,7 +184,16 @@ footer {
     letter-spacing: 0.1em;
     line-height: 1;
     text-decoration: none;
-    color:darkgreen
+    color:darkgreen;
+    &:hover {
+      font-size: 1.3em;
+      background: #CDFEAA;
+      border-bottom: 1px solid;
+    }
+    &:active {
+      background: #265301;
+      color: yellow;
+    }
   }
 
   p {
@@ -203,6 +205,7 @@ footer {
       padding: 0.5em;
     }
   }
+
 }
 
 .menu-button {
@@ -222,6 +225,7 @@ footer {
   right: 25px;
   transform:scale(1.3);
   cursor: pointer;
+  transition: all ease-in 0.25s;
   &:hover {
     background:black;
     color:white;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createFilter } from 'react-search-input';
-import SideNav, { MenuIcon } from 'react-simple-sidenav';
+import SideNav from 'react-simple-sidenav';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -43,12 +43,15 @@ export default class Search extends Component {
     return (
       <div id="location-list">
         <button
-          className="menu-button metal radial"
+          type="button"
+          tabIndex="0"
+          className="menu-button"
           onClick={() => this.setState({ showNav: true })}
         >
         &#128463; MENU
         </button>
         <SideNav
+          tabIndex="1"
           openFromRight
           style={{ overflowScrolling: 'touch' }}
           showNav={this.state.showNav}
@@ -59,6 +62,7 @@ export default class Search extends Component {
             role="search"
             id="Search"
             type="text"
+            tabIndex="0"
             placeholder="
           &#128269; Search in the results"
             value={this.state.searchTerm}
@@ -79,6 +83,7 @@ export default class Search extends Component {
                 tabIndex="0"
                 className="LocationItems"
                 key={place.id}
+                onKeyPress={this.props.populateInfoWindow.bind(this, place.marker)}
                 onClick={this.props.populateInfoWindow.bind(this, place.marker)}
               >
                 {place.name}
