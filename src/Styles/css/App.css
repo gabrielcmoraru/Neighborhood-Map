@@ -191,7 +191,7 @@ footer p:first-child {
   height: 70px;
   width: 70px;
   color: white;
-  background: black;
+  background: #111;
   box-shadow: 0 2px 2px black;
   border: 1px solid;
   padding: 5px;
@@ -206,7 +206,7 @@ footer p:first-child {
   transition: all ease-in 0.25s;
 }
 .menu-button:hover {
-  background: black;
+  background: #333;
   color: white;
   width: 150px;
   transition: all ease-in 0.25s;

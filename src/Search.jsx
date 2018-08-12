@@ -63,6 +63,7 @@ export default class Search extends Component {
             id="Search"
             type="text"
             tabIndex="0"
+            aria-label="Search in the results"
             placeholder="
           &#128269; Search in the results"
             value={this.state.searchTerm}
@@ -75,10 +76,10 @@ export default class Search extends Component {
             {' '}
             {filteredLocations.length === 1 ? 'result' : 'results'}
           </h2>
-          <ul role="listbox" aria-label="Location list">
+          <ul role="menu" aria-label="Location list">
             {filteredLocations.map(place => (
               <li
-                role="button"
+                role="menuitem"
                 aria-label="List item"
                 tabIndex="0"
                 className="LocationItems"

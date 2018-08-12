@@ -130,7 +130,7 @@ class App extends Component {
       </ul>
       <a class='call_to_action' href='https://www.foursquare.com/v/${detailedMarker[0].id}'>
         Check it out on &nbsp;
-        <img src=${fslogo} width='20' height='20' />
+        <img src=${fslogo} width='20' height='20' alt='FourthSquare Logo' />
         <span class='fs_logo'>
         oursquare
         </span>
