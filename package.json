@@ -2,27 +2,32 @@
   "name": "neighborhood-map",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gabrielcmoraru.github.io/Neighborhood-Map/",
   "dependencies": {
     "eslint": "^5.3.0",
+    "gh-pages": "^1.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-foursquare": "^1.0.3",
     "react-scripts": "1.1.4",
     "react-search-filter": "0.0.5",
     "react-search-input": "^0.11.3",
-    "react-simple-sidenav": "^1.0.1",
-    "styled-components": "^3.4.2"
+    "react-simple-sidenav": "^1.0.1"
   },
   "scripts": {
     "start": "sass --watch src/styles/scss:src/styles/css | react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^1.2.0",
+    "react-scripts": "1.1.4"
   }
 }

@@ -43,6 +43,9 @@ class App extends Component {
     script.onerror = () => { alert('Error loading Google API'); };
 
     document.body.appendChild(script);
+  }
+
+  componentDidMount() {
     const params = {
       ll: `${this.props.center.lat},${this.props.center.lng}`,
       query: 'bar',
@@ -53,10 +56,11 @@ class App extends Component {
           foursquare: res.response.venues,
         });
       });
-    console.log(this.state.foursquare);
   }
 
+
   initMap() {
+    console.log(this.state.foursquare);
     const self = this;
     let map;
     map = new window.google.maps.Map(document.getElementById('map'), {
