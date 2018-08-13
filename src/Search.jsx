@@ -15,6 +15,7 @@ export default class Search extends Component {
     };
   }
 
+  /* Set the marker to visible if the name matches the search term, hide if it doesn't  */
   searchUpdated = (searchTerm) => {
     const lowSearch = searchTerm.toLowerCase();
 
@@ -30,6 +31,10 @@ export default class Search extends Component {
       }
     });
   }
+
+  /* Update array with items matching search term if no search show all items.
+     This array will be used to populate the location list.
+  */
 
   render() {
     let filteredLocations;

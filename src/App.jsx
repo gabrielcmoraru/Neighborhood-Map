@@ -8,6 +8,9 @@ import 'Styles/css/App.css';
 
 const KEYS_TO_FILTERS = ['name'];
 
+/* Everything below is properly explained in the Google API documentation.
+ https://developers.google.com/maps/documentation/javascript/tutorial  */
+
 class App extends Component {
   static defaultProps = {
     center: {
