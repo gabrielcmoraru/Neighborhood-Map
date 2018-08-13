@@ -11,7 +11,6 @@ export default class Search extends Component {
     super(props);
     this.state = {
       searchTerm: '',
-      filteredLocations: [],
       showNav: true,
     };
   }
@@ -39,7 +38,7 @@ export default class Search extends Component {
     } else {
       filteredLocations = this.props.locations;
     }
-
+    const { populateInfoWindow } = this.props;
     return (
       <div id="location-list">
         <button
@@ -84,8 +83,8 @@ export default class Search extends Component {
                 tabIndex="0"
                 className="LocationItems"
                 key={place.id}
-                onKeyPress={this.props.populateInfoWindow.bind(this, place.marker)}
-                onClick={this.props.populateInfoWindow.bind(this, place.marker)}
+                onKeyPress={populateInfoWindow.bind(this, place.marker)}
+                onClick={populateInfoWindow.bind(this, place.marker)}
               >
                 {place.name}
               </li>

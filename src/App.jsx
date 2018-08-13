@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import 'Styles/css/App.css';
 import { createFilter } from 'react-search-input';
 import mapStyle from './mapStyle.json';
-import * as key from './keys.js';
+import * as key from './keys';
 import Search from './Search';
 import fslogo from './foursquare-logo.png';
-
-const foursquare = require('react-foursquare')({
-  clientID: key.fsClientId,
-  clientSecret: key.fsClientSecret,
-});
+import 'Styles/css/App.css';
 
 const KEYS_TO_FILTERS = ['name'];
 
@@ -34,7 +29,7 @@ class App extends Component {
     this.populateInfoWindow = this.populateInfoWindow.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.initMap = this.initMap;
     const script = document.createElement('script');
     script.async = true;
@@ -43,19 +38,23 @@ class App extends Component {
     script.onerror = () => { alert('Error loading Google API'); };
 
     document.body.appendChild(script);
-  }
 
-  componentDidMount() {
     const params = {
       ll: `${this.props.center.lat},${this.props.center.lng}`,
       query: 'bar',
     };
-    foursquare.venues.getVenues(params)
-      .then((res) => {
+
+    const fsUrl = `https://api.foursquare.com/v2/venues/search?ll=${params.ll}&query=${params.query}&v=20181308&client_id=${key.fsClientId}&client_secret=${key.fsClientSecret}`;
+
+    fetch(fsUrl).then((response) => {
+      response.json().then((data) => {
         this.setState({
-          foursquare: res.response.venues,
+          foursquare: data.response.venues,
         });
       });
+    }).catch((error) => {
+      console.log(`Something went wrong please look into this ${error}`);
+    });
   }
 
 
@@ -74,23 +73,29 @@ class App extends Component {
     const bounds = new window.google.maps.LatLngBounds();
     const locations = [];
 
-    this.state.foursquare.forEach((location) => {
-      const id = location.id;
-      const marker = new window.google.maps.Marker({
-        position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
-        map,
-        title: location.name,
-        animation: window.google.maps.Animation.DROP,
+    if (this.state.foursquare) {
+      this.state.foursquare.map((location) => {
+        const id = location.id;
+        const marker = new window.google.maps.Marker({
+          position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
+          map,
+          title: location.name,
+          animation: window.google.maps.Animation.DROP,
+        });
+
+        location.id = id;
+        location.marker = marker;
+        locations.push(location);
+
+        bounds.extend(marker.position);
+
+        marker.addListener('click', () => {
+          self.populateInfoWindow(marker);
+        });
+
+        map.fitBounds(bounds);
       });
-      location.id = id;
-      location.marker = marker;
-      locations.push(location);
-      bounds.extend(marker.position);
-      marker.addListener('click', () => {
-        self.populateInfoWindow(marker);
-      });
-      map.fitBounds(bounds);
-    });
+    } else { console.log('No data imported from foursquare API'); }
 
     this.setState({
       locations,

@@ -101,7 +101,6 @@ header {
         transition: all ease-in 0.25s;
         &::after {
           content:'';
-          vertical-align: center;
           display:block;
           height:0.2em;
           width:60%;

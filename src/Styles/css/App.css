@@ -96,7 +96,6 @@ header .header-part-2 {
 }
 .wrapper ul li:hover::after {
   content: "";
-  vertical-align: center;
   display: block;
   height: 0.2em;
   width: 60%;
