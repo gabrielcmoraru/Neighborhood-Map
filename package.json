@@ -14,7 +14,7 @@
     "react-simple-sidenav": "^1.0.1"
   },
   "scripts": {
-    "start": "sass --watch src/styles/scss:src/styles/css | react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
