@@ -32,12 +32,12 @@ class App extends Component {
     this.populateInfoWindow = this.populateInfoWindow.bind(this);
   }
 
-  componentDidMount() {
+  async componentWillMount() {
     window.initMap = this.initMap;
     const script = document.createElement('script');
     script.async = true;
     script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places`;
     script.onerror = () => { alert('Error loading Google API'); };
 
     document.body.appendChild(script);
@@ -49,20 +49,16 @@ class App extends Component {
 
     const fsUrl = `https://api.foursquare.com/v2/venues/search?ll=${params.ll}&query=${params.query}&v=20181308&client_id=${key.fsClientId}&client_secret=${key.fsClientSecret}`;
 
-    fetch(fsUrl).then((response) => {
-      response.json().then((data) => {
-        this.setState({
-          foursquare: data.response.venues,
-        });
-      });
-    }).catch((error) => {
-      console.log(`Something went wrong please look into this ${error}`);
+    const response = await fetch(fsUrl);
+    const data = await response.json();
+    this.setState({
+      foursquare: data.response.venues,
     });
+
+    window.setTimeout(this.initMap, 300);
   }
 
-
   initMap() {
-    console.log(this.state.foursquare);
     const self = this;
     let map;
     map = new window.google.maps.Map(document.getElementById('map'), {
