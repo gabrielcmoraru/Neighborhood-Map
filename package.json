@@ -2,7 +2,7 @@
   "name": "neighborhood-map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gabrielcmoraru.github.io/Neighborhood-Map/",
+  "homepage": "https://gabrielcmoraru.github.io/",
   "dependencies": {
     "eslint": "^5.3.0",
     "gh-pages": "^1.2.0",
