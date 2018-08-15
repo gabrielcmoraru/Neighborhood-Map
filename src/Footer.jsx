@@ -16,7 +16,7 @@ const Footer = () => (
       Foursquare
       </a>
       <br />
-      API's
+      {"API's"}
     </p>
   </footer>
 );

@@ -15,6 +15,8 @@ export default class Search extends Component {
     };
   }
 
+  populateInfoWindow = marker => this.props.populateInfoWindow(marker);
+
   /* Set the marker to visible if the name matches the search term, hide if it doesn't  */
   searchUpdated = (searchTerm) => {
     const lowSearch = searchTerm.toLowerCase();
@@ -37,13 +39,13 @@ export default class Search extends Component {
   */
 
   render() {
-    let filteredLocations;
-    if (this.state.searchTerm) {
-      filteredLocations = this.props.locations.filter(createFilter(this.state.searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
-    } else {
-      filteredLocations = this.props.locations;
-    }
-    const { populateInfoWindow } = this.props;
+    const filteredLocations = (() => {
+      const { state: { searchTerm }, props: { locations } } = this;
+      if (searchTerm) {
+        return locations.filter(createFilter(searchTerm.toLocaleLowerCase(), KEYS_TO_FILTERS));
+      }
+      return locations;
+    })();
     return (
       <div id="location-list">
         <button
@@ -88,8 +90,8 @@ export default class Search extends Component {
                 tabIndex="0"
                 className="LocationItems"
                 key={place.id}
-                onKeyPress={populateInfoWindow.bind(this, place.marker)}
-                onClick={populateInfoWindow.bind(this, place.marker)}
+                onKeyPress={() => this.populateInfoWindow(place.marker)}
+                onClick={() => this.populateInfoWindow(place.marker)}
               >
                 {place.name}
               </li>
