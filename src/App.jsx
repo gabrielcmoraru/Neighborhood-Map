@@ -64,54 +64,58 @@ class App extends Component {
   initMap() {
     const self = this;
     let map;
-    map = new window.google.maps.Map(document.getElementById('map'), {
-      center: this.props.center,
-      styles: mapStyle,
-      zoom: this.props.zoom,
-      disableDefaultUI: true,
-    });
+    if (window.google) {
+      map = new window.google.maps.Map(document.getElementById('map'), {
+        center: this.props.center,
+        styles: mapStyle,
+        zoom: this.props.zoom,
+        disableDefaultUI: true,
+      });
 
-    const largeInfowindow = new window.google.maps.InfoWindow({});
-    const bounds = new window.google.maps.LatLngBounds();
-    const locations = [];
+      const largeInfowindow = new window.google.maps.InfoWindow({});
+      const bounds = new window.google.maps.LatLngBounds();
+      const locations = [];
 
-    if (this.state.foursquare) {
-      this.state.foursquare.map((location) => {
-        const id = location.id;
-        const marker = new window.google.maps.Marker({
-          position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
-          map,
-          title: location.name,
-          animation: window.google.maps.Animation.DROP,
+      if (this.state.foursquare) {
+        this.state.foursquare.map((location) => {
+          const id = location.id;
+          const marker = new window.google.maps.Marker({
+            position: new window.google.maps.LatLng(location.location.lat, location.location.lng),
+            map,
+            title: location.name,
+            animation: window.google.maps.Animation.DROP,
+          });
+
+          location.id = id;
+          location.marker = marker;
+          locations.push(location);
+
+          bounds.extend(marker.position);
+
+          marker.addListener('click', () => {
+            self.populateInfoWindow(marker);
+          });
+
+          map.fitBounds(bounds);
         });
+      } else {
+        document.getElementsByClassName('active-status')[0].innerHTML = '<h3>Foursquare data error !<br/> Please refresh page</h3>';
+      }
 
-        location.id = id;
-        location.marker = marker;
-        locations.push(location);
+      this.setState({
+        locations,
+      });
+      window.google.maps.event.addListener(largeInfowindow, 'closeclick', () => {
+        self.closeWindow(largeInfowindow);
+      });
 
-        bounds.extend(marker.position);
-
-        marker.addListener('click', () => {
-          self.populateInfoWindow(marker);
-        });
-
-        map.fitBounds(bounds);
+      this.setState({
+        map,
+        InfoWindow: largeInfowindow,
       });
     } else {
-      document.getElementsByClassName('active-status')[0].innerHTML = '<h3>Foursquare data error !<br/> Please refresh page</h3>';
+      document.getElementsByClassName('active-status')[0].innerHTML = '<h3>Google API didn\'t initialize !<br/> Please check settings</h3>';
     }
-
-    this.setState({
-      locations,
-    });
-    window.google.maps.event.addListener(largeInfowindow, 'closeclick', () => {
-      self.closeWindow(largeInfowindow);
-    });
-
-    this.setState({
-      map,
-      InfoWindow: largeInfowindow,
-    });
   }
 
   populateInfoWindow(marker) {
