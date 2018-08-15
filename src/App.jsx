@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { createFilter } from 'react-search-input';
 import mapStyle from './mapStyle.json';
 import * as key from './keys';
+import { foursquareAPI, googleAPI, infoWindowData } from './constants';
 import Search from './Search';
-import fslogo from './foursquare-logo.png';
 import 'Styles/css/App.css';
 
 const KEYS_TO_FILTERS = ['name'];
+
 
 /* Everything below is properly explained in the Google API documentation.
  https://developers.google.com/maps/documentation/javascript/tutorial  */
@@ -37,8 +38,8 @@ class App extends Component {
     const script = document.createElement('script');
     script.async = true;
     script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places`;
-    script.error = () => {
+    script.src = `${googleAPI}js?key=${key.gApiKey}&libraries=places`;
+    script.onerror = () => {
       document.getElementsByClassName('active-status')[0].innerHTML = '<h2>Google Maps ran into some issues please refresh</h2>';
     };
 
@@ -49,8 +50,7 @@ class App extends Component {
       query: 'bar',
     };
 
-    const fsUrl = `https://api.foursquare.com/v2/venues/search?ll=${params.ll}&query=${params.query}&v=20181308&client_id=${key.fsClientId}&client_secret=${key.fsClientSecret}`;
-
+    const fsUrl = `${foursquareAPI}search?ll=${params.ll}&query=${params.query}&v=20181308&client_id=${key.fsClientId}&client_secret=${key.fsClientSecret}`;
 
     const response = await fetch(fsUrl);
     const data = await response.json();
@@ -58,8 +58,7 @@ class App extends Component {
       foursquare: data.response.venues,
     });
 
-
-    window.setTimeout(this.initMap, 300);
+    window.setTimeout(this.initMap, 100);
   }
 
   initMap() {
@@ -126,30 +125,7 @@ class App extends Component {
 
   expandInfoWindow(marker, infowindow) {
     const detailedMarker = this.state.foursquare.filter(createFilter(marker.title, KEYS_TO_FILTERS));
-    infowindow.setContent(`
-    <div class='info-box'>
-      <h1 class='info-title'>
-        ${detailedMarker[0].name}
-      </h1>
-      <ul class='info-address'>
-        <li>
-          ${detailedMarker[0].location.formattedAddress[0]}
-        </li>
-        <li>
-          ${detailedMarker[0].location.formattedAddress[1]}
-        </li>
-        <li>
-          ${detailedMarker[0].location.formattedAddress[3]}
-        </li>
-      </ul>
-      <a class='call_to_action' href='https://www.foursquare.com/v/${detailedMarker[0].id}'>
-        Check it out on &nbsp;
-        <img src=${fslogo} width='20' height='20' alt='FourthSquare Logo' />
-        <span class='fs_logo'>
-        oursquare
-        </span>
-      </a>
-    </div>`);
+    infowindow.setContent(infoWindowData(detailedMarker));
   }
 
   closeWindow(infowindow) {
