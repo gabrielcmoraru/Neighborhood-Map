@@ -73,7 +73,7 @@ export default class Search extends Component {
             value={this.state.searchTerm}
             onChange={e => this.searchUpdated(e.target.value)}
           />
-          <h2>
+          <h2 className="active-status">
           Found
             {' '}
             {filteredLocations.length ? filteredLocations.length : 'no'}

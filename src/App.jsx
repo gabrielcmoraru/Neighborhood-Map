@@ -38,7 +38,9 @@ class App extends Component {
     script.async = true;
     script.defer = true;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${key.gApiKey}&libraries=places`;
-    script.onerror = () => { alert('Error loading Google API'); };
+    script.error = () => {
+      document.getElementsByClassName('active-status')[0].innerHTML = '<h2>Google Maps ran into some issues please refresh</h2>';
+    };
 
     document.body.appendChild(script);
 
@@ -49,11 +51,13 @@ class App extends Component {
 
     const fsUrl = `https://api.foursquare.com/v2/venues/search?ll=${params.ll}&query=${params.query}&v=20181308&client_id=${key.fsClientId}&client_secret=${key.fsClientSecret}`;
 
+
     const response = await fetch(fsUrl);
     const data = await response.json();
     this.setState({
       foursquare: data.response.venues,
     });
+
 
     window.setTimeout(this.initMap, 300);
   }
@@ -94,7 +98,9 @@ class App extends Component {
 
         map.fitBounds(bounds);
       });
-    } else { console.log('No data imported from foursquare API'); }
+    } else {
+      document.getElementsByClassName('active-status')[0].innerHTML = '<h3>Foursquare data error !<br/> Please refresh page</h3>';
+    }
 
     this.setState({
       locations,
