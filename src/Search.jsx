@@ -57,7 +57,7 @@ export default class Search extends Component {
         &#128463; MENU
         </button>
         <SideNav
-          tabIndex="1"
+          tabIndex="0"
           openFromRight
           style={{ overflowScrolling: 'touch' }}
           showNav={this.state.showNav}

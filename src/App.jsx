@@ -33,7 +33,7 @@ class App extends Component {
     this.populateInfoWindow = this.populateInfoWindow.bind(this);
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     window.initMap = this.initMap;
     const script = document.createElement('script');
     script.async = true;
@@ -42,6 +42,7 @@ class App extends Component {
     script.onerror = () => {
       document.getElementsByClassName('active-status')[0].innerHTML = '<h2>Google Maps ran into some issues please refresh</h2>';
     };
+
 
     document.body.appendChild(script);
 
@@ -71,6 +72,7 @@ class App extends Component {
         zoom: this.props.zoom,
         disableDefaultUI: true,
       });
+
 
       const largeInfowindow = new window.google.maps.InfoWindow({});
       const bounds = new window.google.maps.LatLngBounds();
@@ -117,6 +119,7 @@ class App extends Component {
       document.getElementsByClassName('active-status')[0].innerHTML = '<h3>Google API didn\'t initialize !<br/> Please check settings</h3>';
     }
   }
+
 
   populateInfoWindow(marker) {
     const infowindow = this.state.InfoWindow;
