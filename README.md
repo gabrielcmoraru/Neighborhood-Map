@@ -6,7 +6,7 @@ To run the project localy:
   * You will need to create an account for [Google API](https://console.cloud.google.com/apis/) & [Foursquare API](https://developer.foursquare.com/places-api) and fill up the info in the keys.js
   * **MAKE SURE YOU HAVE YOUR OWN API KEY's THE ONE's IN THE PROJECT ONLY WORK ON MY IP's** truth be told it will work on your localhost but do get your own is FREE
   * Start the local development server with `npm start` from you terminal
-  * Yes it comes with a service woker by default from react this is **only available in production mode** to get there just run `npm run build` and you can start a local server from the build folder of the project with `python -m http.server` assuming you have [Python 3](https://www.python.org/downloads/) installed; the magic happens when you turn the server down and try that local address again youll see ;)
+  * Yes it comes with a service woker by default from react this is **only available in production mode** to get there just run `npm run build` and you can start a local server run `serve -s build` directly from the app directory and then open the browser at localhost:5000 OR => from the build folder of the project with `python -m http.server` assuming you have [Python 3](https://www.python.org/downloads/) installed; the magic happens when you turn the server down and try that local address again youll see ;)
   * Did you say you want to put this on github pages? sure thing `npm run deploy` but before that make sure you make the necessary amendments you can find a very detailed step by step [here](https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d)
 
 ## THE ROAD
